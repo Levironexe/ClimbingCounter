@@ -1,0 +1,135 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/bgcolor">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:padding="8dp">
+
+
+        <!-- Main Content - Horizontal Layout -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:orientation="horizontal">
+
+            <!-- Score Display Box -->
+            <androidx.cardview.widget.CardView
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_margin="4dp"
+                android:layout_weight="2"
+                app:cardCornerRadius="20dp"
+                app:cardElevation="4dp">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:background="@color/lighterbgcolor"
+                    android:gravity="center"
+                    android:orientation="vertical"
+                    android:paddingVertical="8dp">
+                    <!-- Header -->
+                    <RelativeLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:baselineAligned="false"
+                        android:paddingStart="8dp">
+
+                        <TextView
+                            android:id="@+id/scoreTitle"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_centerInParent="true"
+                            android:text="SCORE"
+                            android:textColor="@android:color/white"
+                            android:textSize="@dimen/score_title_text_size" />
+
+                        <ImageButton
+                            android:id="@+id/settingsButton"
+                            android:layout_width="40dp"
+                            android:layout_height="40dp"
+                            android:background="@drawable/rounded_button"
+                            android:padding="8dp"
+                            android:src="@drawable/settings" />
+                    </RelativeLayout>
+                    <TextView
+                        android:id="@+id/scoreText"
+                        android:layout_width="match_parent"
+                        android:layout_height="0dp"
+                        android:layout_weight="1"
+                        android:gravity="center"
+                        android:includeFontPadding="false"
+                        android:text="0"
+                        android:textColor="@android:color/white"
+                        android:textSize="@dimen/score_text_size"
+                        android:textStyle="bold" />
+
+                    <TextView
+                        android:id="@+id/holdCountText"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:gravity="center"
+                        android:text="Hold Count: 0"
+                        android:textColor="@android:color/white"
+                        android:textSize="@dimen/hold_count_text_size"
+                        android:textStyle="bold" />
+                </LinearLayout>
+            </androidx.cardview.widget.CardView>
+
+            <!-- Buttons Container -->
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:orientation="vertical"
+                android:padding="4dp">
+
+                <!-- Fall/Climb buttons -->
+
+                <Button
+                    android:id="@+id/climbButton"
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:layout_marginBottom="4dp"
+                    android:layout_weight="1"
+                    android:background="@drawable/rounded_button_blue"
+                    android:text="CLIMB"
+                    android:textColor="@android:color/black"
+                    android:textSize="@dimen/button_text_size"
+                    android:textStyle="bold" />
+
+                <Button
+                    android:id="@+id/fallButton"
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:layout_marginVertical="4dp"
+                    android:layout_weight="1"
+                    android:background="@drawable/rounded_button_red"
+                    android:text="FALL"
+                    android:textColor="@android:color/black"
+                    android:textSize="@dimen/button_text_size"
+                    android:textStyle="bold" />
+
+                <Button
+                    android:id="@+id/resetButton"
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:layout_marginTop="4dp"
+                    android:layout_weight="1"
+                    android:background="@drawable/rounded_button_gray"
+                    android:text="RESET"
+                    android:textColor="@android:color/black"
+                    android:textSize="@dimen/reset_button_text_size"
+                    android:textStyle="bold" />
+            </LinearLayout>
+        </LinearLayout>
+    </LinearLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>

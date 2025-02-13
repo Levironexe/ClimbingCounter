@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="purple_80">#FFD0BCFF</color>
+    <color name="purple_grey_80">#FFCCC2DC</color>
+    <color name="pink_80">#FFEFB8C8</color>
+
+    <color name="purple_40">#FF6650a4</color>
+    <color name="purple_grey_40">#FF625b71</color>
+    <color name="pink_40">#FF7D5260</color>
+
+    <!-- Custom colors -->
+    <color name="main_green">#FF21C117</color>
+    <color name="main_blue">#FF009EFF</color>
+    <color name="main_red">#FFFF0F00</color>
+    <color name="bgcolor">#FF1E293B</color>
+    <color name="lighterbgcolor">#FF2A3B53</color>
+
+    <!-- Button colors -->
+    <color name="neon_red">#FFFF3C28</color>
+    <color name="neon_blue">#FF0AB9E6</color>
+    <color name="neon_red_darker">#FFC02820</color>
+    <color name="neon_blue_darker">#FF0A6E8A</color>    <!-- Deeper, darker neon blue -->
+</resources>

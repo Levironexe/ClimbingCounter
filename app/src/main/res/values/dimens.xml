@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="score_title_text_size">40sp</dimen>
+    <dimen name="score_text_size">296sp</dimen>
+    <dimen name="hold_count_text_size">36sp</dimen>
+    <dimen name="button_text_size">32sp</dimen>
+    <dimen name="reset_button_text_size">28sp</dimen>
+
+    <dimen name="default_padding">16dp</dimen>
+    <dimen name="card_margin">20dp</dimen>
+</resources>
