@@ -11,15 +11,27 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.graphics.toArgb
 import com.example.climbingcounter.ui.theme.MainBlue
 import com.example.climbingcounter.ui.theme.MainGreen
 import com.example.climbingcounter.ui.theme.MainRed
 
 class ClimbingCounterViewModel : ViewModel() {
+    private var _context: Context? = null
+
+    fun setContext(context: Context) {
+        _context = context
+        // Update color based on saved theme preference
+        _state.value = _state.value?.copy(
+            scoreColor = if (ThemeManager.isDarkMode(context)) {
+                Color.White
+            } else {
+                Color.Black
+            }
+        )
+    }
+
     private val _state = MutableLiveData(ButtonState())
     val state: LiveData<ButtonState> = _state
-
     private var winSound: MediaPlayer? = null
     private val _currentLanguage = MutableLiveData<Language>(Language.ENGLISH)
     val currentLanguage: LiveData<Language> = _currentLanguage
@@ -39,11 +51,6 @@ class ClimbingCounterViewModel : ViewModel() {
         _strings.value = StringResources.English()
     }
 
-    private var _context: Context? = null
-
-    fun setContext(context: Context) {
-        _context = context
-    }
 
     fun initializeLanguage() {
         _currentLanguage.value = _currentLanguage.value ?: Language.ENGLISH
@@ -88,7 +95,7 @@ class ClimbingCounterViewModel : ViewModel() {
         when (action) {
             is ButtonAction.Climb -> increaseScore()
             is ButtonAction.Fall -> decreaseScore()
-            is ButtonAction.Reset -> resetScore()
+            is ButtonAction.Reset -> _context?.let { resetScore(it) }
             is ButtonAction.LanguageChange -> {}
             is ButtonAction.DisplayMode -> {}
         }
@@ -97,11 +104,7 @@ class ClimbingCounterViewModel : ViewModel() {
     private fun increaseScore() {
         val currentState = _state.value ?: return
         val currentScore = currentState.score.toIntOrNull() ?: 0
-        fun levelUp(view: View) {
-            val popSize = AnimatorInflater.loadAnimator(view.context, R.animator.level_up)
-            popSize.setTarget(view)
-            popSize.start()
-        }
+
         // Prevent further score increase if already at or beyond 18
         if (currentScore >= 18) {
             showMessage("Maximum height reached!")
@@ -148,7 +151,7 @@ class ClimbingCounterViewModel : ViewModel() {
     }
 
     fun getScoreColor(): Color {
-        val currentState = _state.value ?: return Color.White  // provide a default color
+        val currentState = _state.value ?: return Color.White
         return currentState.scoreColor
     }
     fun getScore(): String {
@@ -187,9 +190,9 @@ class ClimbingCounterViewModel : ViewModel() {
         }
     }
 
-    private fun resetScore() {
+    private fun resetScore(context: Context) {
+        _context = context
         val currentState = _state.value ?: return
-
         Log.d("ViewModel", "Current Score: ${currentState.score}")
         Log.d("ViewModel", "Is Fallen: ${currentState.isFallen}")
 
@@ -198,7 +201,11 @@ class ClimbingCounterViewModel : ViewModel() {
                 score = "0",
                 hold = "0",
                 isFallen = false,
-                scoreColor = Color.White
+                scoreColor = if (ThemeManager.isDarkMode(context)) {
+                    Color.White
+                } else {
+                    Color.Black
+                }
             )
             Log.d("ViewModel", "Reset successful")
         } else {

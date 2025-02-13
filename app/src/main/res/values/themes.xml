@@ -1,5 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+    <!-- Dark theme -->
+    <style name="Theme.ClimbingCounter_dark" parent="Theme.MaterialComponents.NoActionBar">
+        <item name="backgroundColor">@color/bgcolor</item>
+        <item name="customCardBackground">@color/lighterbgcolor</item>
+        <item name="textColor">@color/white</item>
+    </style>
 
-    <style name="Theme.ClimbingCounter" parent="android:Theme.Material.Light.NoActionBar" />
+    <!-- Light theme -->
+    <style name="Theme.ClimbingCounter_light" parent="Theme.MaterialComponents.Light.NoActionBar">
+        <item name="backgroundColor">@color/bgcolor_lightmode</item>
+        <item name="customCardBackground">@color/darkerbgcolor_lightmode</item>
+        <item name="textColor">@color/black</item>
+    </style>
 </resources>

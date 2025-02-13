@@ -20,6 +20,7 @@ object DialogHelper {
 
         val titleView = TextView(context).apply {
             text = currentStrings.dialogTitle
+            setTextColor(ContextCompat.getColor(context, android.R.color.black))
             setTextSize(TypedValue.COMPLEX_UNIT_SP, 30f)
             typeface = Typeface.DEFAULT_BOLD
             setPadding(48, 32, 48, 16)

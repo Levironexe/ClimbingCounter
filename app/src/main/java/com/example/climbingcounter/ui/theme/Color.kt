@@ -14,9 +14,3 @@ val Pink40 = Color(0xFF7D5260)
 val MainGreen = Color(0xFF21C117)
 val MainBlue = Color(0xFF009EFF)
 val MainRed = Color(0xFFFF0F00)
-val bgcolor = Color(0xFF1E293B)
-val lighterbgcolor = Color(0xFF2A3B53)
-
-//Custom color Buttons
-val NeonRed = Color(0xFFFF3C28)
-val NeonBlue = Color(0xFF0AB9E6)

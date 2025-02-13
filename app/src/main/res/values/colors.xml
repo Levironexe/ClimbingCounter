@@ -12,8 +12,16 @@
     <color name="main_green">#FF21C117</color>
     <color name="main_blue">#FF009EFF</color>
     <color name="main_red">#FFFF0F00</color>
+    <color name="black">#FF000000</color>
+    <color name="white">#FFFFFFFF </color>
+
+    <!-- background color for light mode -->
     <color name="bgcolor">#FF1E293B</color>
     <color name="lighterbgcolor">#FF2A3B53</color>
+
+    <!-- background color for light mode -->
+    <color name="bgcolor_lightmode">#FFF8F9FA</color>
+    <color name="darkerbgcolor_lightmode">#FFDEE2E6</color>
 
     <!-- Button colors -->
     <color name="neon_red">#FFFF3C28</color>

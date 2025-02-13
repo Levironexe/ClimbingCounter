@@ -1,5 +1,6 @@
 package com.example.climbingcounter
 
+import android.app.Activity
 import android.app.AlertDialog
 import android.content.Context
 import android.graphics.Typeface
@@ -8,6 +9,7 @@ import android.widget.Button
 import android.widget.LinearLayout
 import android.widget.TextView
 import androidx.core.content.ContextCompat
+import androidx.appcompat.app.AppCompatDelegate
 
 object SettingDialog {
     private var currentDialog: AlertDialog? = null
@@ -19,6 +21,7 @@ object SettingDialog {
         // Create title TextView
         val titleView = TextView(context).apply {
             text = "Settings"
+            setTextColor(ContextCompat.getColor(context, android.R.color.black))
             setTextSize(TypedValue.COMPLEX_UNIT_SP, 30f)
             typeface = Typeface.DEFAULT_BOLD
             setPadding(48, 32, 48, 16)
@@ -33,6 +36,7 @@ object SettingDialog {
         // Add "Select Language" label
         container.addView(TextView(context).apply {
             text = "Select Language"
+            setTextColor(ContextCompat.getColor(context, android.R.color.black))
             setTextSize(TypedValue.COMPLEX_UNIT_SP, 24f)
             typeface = Typeface.DEFAULT  // Changed from DEFAULT_MEDIUM to DEFAULT
             setPadding(0, 0, 0, 24)
@@ -79,5 +83,38 @@ object SettingDialog {
 
         currentDialog?.show()
         currentDialog?.window?.setBackgroundDrawableResource(R.drawable.rounded_dialog)
+
+
+        // Func to change theme
+        val themeSwitch = TextView(context).apply {
+            text = "Toggle Theme"
+            setTextColor(ContextCompat.getColor(context, android.R.color.black))
+            setTextSize(TypedValue.COMPLEX_UNIT_SP, 24f)
+            typeface = Typeface.DEFAULT
+            setPadding(0, 24, 0, 24)
+        }
+        container.addView(themeSwitch)
+
+        val themeButton = Button(context).apply {
+            text = if (ThemeManager.isDarkMode(context)) "Light Mode" else "Dark Mode"
+            setTextSize(TypedValue.COMPLEX_UNIT_SP, 20f)
+            layoutParams = LinearLayout.LayoutParams(
+                LinearLayout.LayoutParams.MATCH_PARENT,
+                LinearLayout.LayoutParams.WRAP_CONTENT
+            ).apply {
+                setMargins(0, 8, 0, 8)
+            }
+            setBackgroundResource(R.drawable.rounded_dialog_button)
+            setTextColor(ContextCompat.getColor(context, android.R.color.white))
+            setPadding(32, 16, 32, 16)
+
+            setOnClickListener {
+                val newDarkMode = !ThemeManager.isDarkMode(context)
+                ThemeManager.setDarkMode(context, newDarkMode)
+                (context as Activity).recreate()
+                currentDialog?.dismiss()
+            }
+        }
+        container.addView(themeButton)
     }
 }

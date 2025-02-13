@@ -13,9 +13,9 @@ import androidx.compose.ui.graphics.toArgb
 import android.animation.AnimatorInflater
 import android.view.View
 import android.animation.ObjectAnimator
-import android.view.animation.CycleInterpolator
 import androidx.compose.ui.graphics.Color
-
+import androidx.appcompat.app.AppCompatActivity
+import androidx.appcompat.app.AppCompatDelegate
 
 class MainActivity : ComponentActivity() {
     private lateinit var scoreText: TextView
@@ -33,12 +33,18 @@ class MainActivity : ComponentActivity() {
     private val viewModel: ClimbingCounterViewModel by viewModels()
 
     override fun onCreate(savedInstanceState: Bundle?) {
+        if (ThemeManager.isDarkMode(this)) {
+            setTheme(R.style.Theme_ClimbingCounter_dark)
+        } else {
+            setTheme(R.style.Theme_ClimbingCounter_light)
+        }
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
         // Initialize context and language before setting up UI
         viewModel.setContext(this)
         viewModel.initializeLanguage()
+
 
         initializeViews()
         initializeSounds()
@@ -51,7 +57,7 @@ class MainActivity : ComponentActivity() {
     private fun initializeViews() {
         scoreText = findViewById(R.id.scoreText)
         scoreTitle = findViewById(R.id.scoreTitle)
-        holdCountText = findViewById(R.id.holdCountText)  // Matches XML ID exactly
+        holdCountText = findViewById(R.id.holdCountText)
         fallButton = findViewById(R.id.fallButton)
         climbButton = findViewById(R.id.climbButton)
         resetButton = findViewById(R.id.resetButton)
@@ -73,19 +79,35 @@ class MainActivity : ComponentActivity() {
         shakeAnimator.setTarget(view)
 
         if (view is TextView) {
-            val colorAnimator = ObjectAnimator.ofArgb(
-                view as TextView,
-                "textColor",
-                viewModel.getScoreColor().toArgb(),
-                Color.White.toArgb(),
-                Color.Red.toArgb(),
-                Color.White.toArgb(),
-                Color.Red.toArgb(),
-                viewModel.getScoreColor().toArgb()
-            ) .apply {
-                duration = 500
+            if (ThemeManager.isDarkMode(this)) {
+                val colorAnimator = ObjectAnimator.ofArgb(
+                    view as TextView,
+                    "textColor",
+                    viewModel.getScoreColor().toArgb(),
+                    Color.White.toArgb(),
+                    Color.Red.toArgb(),
+                    Color.White.toArgb(),
+                    Color.Red.toArgb(),
+                    viewModel.getScoreColor().toArgb()
+                ).apply {
+                    duration = 500
+                }
+                colorAnimator.start()
+            } else {
+                val colorAnimator = ObjectAnimator.ofArgb(
+                    view as TextView,
+                    "textColor",
+                    viewModel.getScoreColor().toArgb(),
+                    Color.Black.toArgb(),
+                    Color.Red.toArgb(),
+                    Color.Black.toArgb(),
+                    Color.Red.toArgb(),
+                    viewModel.getScoreColor().toArgb()
+                ) .apply {
+                    duration = 500
+                }
+                colorAnimator.start()
             }
-            colorAnimator.start()
         }
         shakeAnimator.start()
     }
@@ -113,9 +135,6 @@ class MainActivity : ComponentActivity() {
                 }
             }
         }
-
-
-
 
         climbButton.setupTouchAnimation()
         fallButton.setupTouchAnimation()
@@ -146,7 +165,6 @@ class MainActivity : ComponentActivity() {
         viewModel.state.observe(this) { state ->
             scoreText.text = state.score
             scoreText.setTextColor(state.scoreColor.toArgb())
-
 
             // Use the correct hold count text method from ViewModel
             holdCountText.text = viewModel.getHoldCountText()

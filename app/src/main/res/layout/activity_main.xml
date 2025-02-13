@@ -4,7 +4,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/bgcolor">
+    android:background="?attr/backgroundColor">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -24,7 +24,7 @@
                 android:layout_height="wrap_content"
                 android:layout_centerInParent="true"
                 android:text="SCORE"
-                android:textColor="@android:color/white"
+                android:textColor="?attr/textColor"
                 android:textSize="@dimen/score_title_text_size" />
 
             <ImageButton
@@ -50,12 +50,12 @@
                 android:layout_height="wrap_content"
                 android:layout_margin="8dp"
                 app:cardCornerRadius="20dp"
+                app:cardBackgroundColor="?attr/customCardBackground"
                 app:cardElevation="4dp">
 
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:background="@color/lighterbgcolor"
                     android:orientation="vertical"
                     android:padding="8dp">
 
@@ -66,7 +66,7 @@
                         android:gravity="center"
                         android:includeFontPadding="false"
                         android:text="0"
-                        android:textColor="@android:color/white"
+                        android:textColor="?attr/textColor"
                         android:textSize="@dimen/score_text_size"
                         android:textStyle="bold" />
 
@@ -76,7 +76,7 @@
                         android:layout_height="wrap_content"
                         android:gravity="center"
                         android:text="Hold Count: 0"
-                        android:textColor="@android:color/white"
+                        android:textColor="?attr/textColor"
                         android:textSize="@dimen/hold_count_text_size"
                         android:textStyle="bold" />
                 </LinearLayout>
@@ -124,6 +124,7 @@
 
                 <!-- Reset button -->
                 <Button
+                    style="@null"
                     android:id="@+id/resetButton"
                     android:layout_width="match_parent"
                     android:layout_height="0dp"
